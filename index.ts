@@ -1,0 +1,2 @@
+// import {Accordian,Avatar,Badge,Button,Card,Header,FormInput,Pagination,Popup,Select,Sidebar,Switch,Table,TabPanel,TextArea} from './src/components';
+// export {Accordian,Avatar,Badge,Button,Card,Header,FormInput,Pagination,Popup,Select,Sidebar,Switch,Table,TabPanel,TextArea}
