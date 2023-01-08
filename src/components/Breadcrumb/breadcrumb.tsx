@@ -55,7 +55,7 @@ const Breadcrumb = forwardRef(
           sx={{
             "& .MuiBreadcrumbs-li": {
               ":hover": {
-                fontWeight:600,
+                fontWeight:550,
               },
             },
           }}
