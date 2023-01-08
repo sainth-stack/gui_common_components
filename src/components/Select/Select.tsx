@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 type Option = {
     id?: string | number,
     label?: string,
-    value?: string,
+    value?: string | number,
     leftIcon?: React.ReactNode,
     rightIcon?: React.ReactNode
 }
@@ -29,7 +29,7 @@ interface FormInputProps {
     endIcon?: React.ReactSVGElement | React.ReactNode,
     options?: Array<Option>,
     optionsType: string,
-    sx?:any,
+    sx?:React.CSSProperties,
     itemHeight?:any,
     itemPaddingTop?:any,
     itemWidth?:any,
@@ -46,7 +46,7 @@ const Select = forwardRef((props: FormInputProps, ref) => {
             target: { value },
         } = event;
         setSelected(
-            typeof value === 'string' ? value.split(',') : value.toString().split(','),
+            typeof value === 'string' ? value.split(',') : value,
         );
         props.onChange(event)
     }; const {
@@ -82,6 +82,7 @@ const Select = forwardRef((props: FormInputProps, ref) => {
     },[])
     return (
         <FormControl sx={{minWidth:'100%'}}>
+            {/* <InputLabel id="demo-simple-select-label" sx={{ paddingBottom: '20px' }} color="primary">Name</InputLabel> */}
             <StyledSelect
                 ownerState={{size}}
                 id="demo-simple-select-standard"
@@ -92,16 +93,17 @@ const Select = forwardRef((props: FormInputProps, ref) => {
                 value={selected}
                 onChange={handleChange}
                 renderValue={optionsType == "chips" && multiple ? (selected: any) => {
+                    const optionLabel=options.filter((item)=>selected === item.value)
                     return (
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                         {selected.map((value: any) => (
                             <Chip key={value} label={value} />
                         ))}
-                    </Box>
+                    </Box> 
                     )
                 } : ()=>{
                     const optionLabel=options.filter((item)=>selected === item.value)
-                    return (<>{optionLabel[0] ? optionLabel[0].label : selected.join(', ') } </>)
+                    return (<>{optionLabel[0].label} </>)
                 }
                 }
                 sx={{

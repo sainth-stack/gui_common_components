@@ -20,10 +20,10 @@ export default {
 } as ComponentMeta<typeof FormSelect>
 
 const options1 = [
-    { label: 'Oliver Hansen', value: 'Oliver Hansen' },
-    { label: 'Van Henry', value: 'Van Henry' },
-    { label: 'April Tucker', value: 'April Tucker' },
-    { label: '3insys', value: '3insys' }
+    { label: 'Oliver Hansen', value: 0 },
+    { label: 'Van Henry', value:1 },
+    { label: 'April Tucker', value: 2 },
+    { label: '3insys', value: 3 }
 ];
 
 const Template: ComponentStory<typeof FormSelect> = (args) => <FormSelect {...args} />
