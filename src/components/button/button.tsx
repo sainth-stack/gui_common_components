@@ -23,6 +23,8 @@ interface ButtonProps {
   children?: React.ReactNode;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
+  sx?: any;
+  onClick?: () => void;
 }
 
 const Button:any = forwardRef(
@@ -33,7 +35,9 @@ const Button:any = forwardRef(
       color,
       variant,
       size,
-      children = "button",
+      children, 
+      sx, 
+      onClick
     }: ButtonProps,
     ref
   ) => {
@@ -45,7 +49,8 @@ const Button:any = forwardRef(
       "& svg, img": { width: 1, height: 1, objectFit: "cover" },
     };
     return (
-      <StyledButton theme={theme} variant={variant} color={color} size={size} startIcon={startIcon} endIcon={endIcon}>
+      <StyledButton theme={theme} variant={variant} color={color} size={size} sx={{...sx}}
+      onClick={onClick} startIcon={startIcon} endIcon={endIcon}>
         {children}
       </StyledButton>
     );

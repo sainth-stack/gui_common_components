@@ -18,7 +18,7 @@ interface FormInputProps {
     innerRef?: React.RefObject<HTMLInputElement>,
     startIcon?: React.ReactSVGElement | React.ReactNode,
     endIcon?: React.ReactSVGElement | React.ReactNode,
-    sx?:React.CSSProperties
+    sx?:any
 }
 
 const FormInput = forwardRef((props: FormInputProps, ref) => {
