@@ -5,6 +5,7 @@ import { forwardRef } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {MdOutlineKeyboardArrowDown,MdOutlineKeyboardArrowRight} from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -38,8 +39,12 @@ const Breadcrumb = forwardRef(
 
       ...other
     }: BreadcrumbProps,
-    ref
+    ref 
   ) => {
+    const navigate = useNavigate();
+    const navigateTo=(url:string)=>()=>{
+      navigate(url)
+     }
     return (
       <div role="presentation" onClick={handleClick}>
         <StyledBreadcrumbs
@@ -48,20 +53,22 @@ const Breadcrumb = forwardRef(
           aria-label="breadcrumb"
           {...other}
         >
-          {other.breaddata?.map((item: any) => {
+          {other.breaddata?.map((item: any,index:any) => {
             return (
               <Link
-                underline="hover"
-                sx={{ display: "flex", alignItems: "center" }}
+                key={index}
+                underline="none"
+                sx={{ display: "flex", alignItems: "center",cursor:'pointer' }}
                 color="inherit"
-                href="/"
                 fontSize={fontSize}
                 fontWeight={fontWeight}
+                onClick={navigateTo(item?.url as string)}
               >
                 {startIcon && item.startIcon}
                 {item.name}
                 {endIcon &&  item.startIcon}
               </Link>
+              
             );
           })}
         </StyledBreadcrumbs>
