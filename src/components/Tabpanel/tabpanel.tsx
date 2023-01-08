@@ -11,7 +11,7 @@ import Tabs from "@mui/material/Tabs";
 export interface Tab {
   name: string;
   id:number;
-  active:boolean;
+  active?:boolean;
 
 }
 interface ITabpanelProps {
