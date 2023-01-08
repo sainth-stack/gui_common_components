@@ -38,10 +38,11 @@ interface HeaderProps {
     user?: string,
     menuItems?: Array<menuItems>,
     logo?: React.ReactNode,
-    avatarImg?: any
+    avatarImg?: any,
+    handlecallback?: any,
 }
 
-const Header = ({ color, position, enableColorOnDark, sx, searchBar=true,logo,avatarImg, ...other }: HeaderProps) => {
+const Header = ({ color, position, enableColorOnDark, sx, searchBar=true,handlecallback,logo,avatarImg, ...other }: HeaderProps) => {
     
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -62,6 +63,10 @@ const Header = ({ color, position, enableColorOnDark, sx, searchBar=true,logo,av
         setAnchorEl(null);
         handleMobileMenuClose();
     };
+
+    const handleCallback = () => {
+        handlecallback()
+    }
 
     const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMobileMoreAnchorEl(event.currentTarget);
@@ -145,7 +150,7 @@ const Header = ({ color, position, enableColorOnDark, sx, searchBar=true,logo,av
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
                     >
-                        <IoMdMenu />
+                        <IoMdMenu onClick={handleCallback}/>
                     </IconButton>
                     {searchBar && <Search>
                         <StyledInputBase

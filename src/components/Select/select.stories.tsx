@@ -26,9 +26,6 @@ const options1 = [
     { label: '3insys', value: '3insys' }
 ];
 
-const getSelectedValue = (val: any) => {
-    console.log(val)
-}
 const Template: ComponentStory<typeof FormSelect> = (args) => <FormSelect {...args} />
 
 export const FormComponent = Template.bind({});
@@ -48,5 +45,4 @@ FormComponent.args = {
     itemStyles:{
 
     },
-    getSelectedValue: getSelectedValue
 };

@@ -14,7 +14,7 @@ interface AccordianProps {
     startIcon?: React.ReactNode,
     accordianId?: string,
     accordianLabel?: AccordianLabel,
-    sx?:React.CSSProperties,
+    sx?:any,
     children?: React.ReactNode,
 }
 const Accordian = forwardRef((props: AccordianProps) => {
