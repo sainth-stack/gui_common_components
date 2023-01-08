@@ -1,26 +1,27 @@
 import { alpha, styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
-import xsiLogo from "../../assets/images/xsiLogo.svg";
+import xsiLogo from "../../assets/svg/xsiLogo.svg";
 import AppBar from '@mui/material/AppBar';
 import { Box, Mixins, Palette, Shadows, Theme, Transitions, ZIndex } from '@mui/material';
 import { Typography } from '@mui/material/styles/createTypography';
 
 export const Logo = styled('div')(({ theme }) => ({
-        width: "250px",
-        height: "70px",
-        display: "flex",
-        alignItems: "center",
-        '& > .MuiPaper-root': {
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center center",
-          backgroundSize: "90%",
-          width: "200px",
-          height: "45px",
-          backgroundColor: "inherit"
-        },
-        [theme.breakpoints.down('sm')]: {
-          display: "none"
-        }
+  padding: "0 1.5rem",
+  width: "250px",
+  height: "70px",
+  display: "flex",
+  alignItems: "center",
+  '& > div': {
+    backgroundImage: `url(${xsiLogo})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    backgroundSize: "90%",
+    width: "200px",
+    height: "45px"
+  },
+  // [theme.breakpoints.down('sm')]: {
+  //   display: "none"
+  // }
 }))
 
 export const Search = styled('div')(({ theme }) => ({

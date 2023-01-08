@@ -27,7 +27,7 @@ export const StyledInput = styled(TextField)(({ theme, ownerState }: IStyledProp
         "& .MuiFilledInput-root": {
             backgroundColor: "white",
             borderRadius: '0.20rem',
-            borderBottom:'1px solid #ced4da'
+            borderBottom:'1px solid #ced4da',
         },
         "& .MuiFilledInput-root:hover:not(.Mui-disabled):before": {
             backgroundColor: "transparent",
@@ -58,13 +58,32 @@ export const StyledInput = styled(TextField)(({ theme, ownerState }: IStyledProp
             outline: 'none',
             boxShadow: 'none',
             border: '1px solid #ced4da'
+        },
+        "& .MuiOutlinedInput-root": {
+            padding:0,
         }
     }
     return {
         position: 'relative',
         width: '100%',
-        fontWeight: 400,
         fontSize: '0.875rem',
+        'input': {
+            '&::placeholder': {
+              textOverflow: 'ellipsis !important',
+              color: 'black',
+            }
+          },
+          '& input[type=number]': {
+            '-moz-appearance': 'textfield'
+        },
+        '& input[type=number]::-webkit-outer-spin-button': {
+            '-webkit-appearance': 'none',
+            margin: 0
+        },
+        '& input[type=number]::-webkit-inner-spin-button': {
+            '-webkit-appearance': 'none',
+            margin: 0
+        },
         ...outlineComponent,
         ...filledComponent,
 

@@ -23,7 +23,10 @@ interface SwitchProps {
 
     control?: React.ReactNode
     label?: string
-    sx?:any
+    sx?:any,
+    handleChange?: any,
+    checked?:boolean,
+    name?:string,
 }
 // const iconStyle = {
 //     width: 16,
@@ -31,11 +34,12 @@ interface SwitchProps {
 //     '& svg, img': { width: 1, height: 1, objectFit: 'cover' },
 //   };
 
-const Switch = forwardRef(({edge="end", size="medium", color="primary",  label="",sx={}}:SwitchProps,ref) => {
+const Switch = forwardRef(({edge="end", size="medium", color="primary",checked,label="",handleChange,sx={},name=""}:SwitchProps,ref) => {
   return (
     <FormControlLabel
-        control={<SwitchStyle {...{edge,size,color,sx:{...sx}}} defaultChecked />}
+        control={<SwitchStyle {...{edge,size,color,sx:{...sx}}} defaultChecked={checked} onChange={handleChange}/>}
         label={label}
+        name={name}
       />
   )
 })

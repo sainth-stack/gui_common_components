@@ -97,10 +97,10 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
     );
   }
 
- const Pagination = ({isTablePagination,rowsPerPageOptions,colSpan,count=0,rowsPerPage=0,page=0,SelectProps,setPage=() => {}, setRowsPerPage=() => {}, ...other}:PaginationProps) => {
+ const Pagination = ({isTablePagination,rowsPerPageOptions,colSpan,count=0,rowsPerPage=0,page=0,SelectProps,setPage=() => {},setRowsPerPage=() => {}, ...other}:PaginationProps) => {
 
   const handleChangePage = (
-      event: React.MouseEvent<HTMLButtonElement> | null,
+      event: React.MouseEvent<HTMLButtonElement> | unknown,
       newPage: number,
     ) => {
       setPage(newPage);
@@ -112,8 +112,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0);
     };
-
-    return (
+        return (
       <>
       {
         isTablePagination ? 
@@ -147,7 +146,8 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
               showLastButton: other.showLastButton,
               siblingCount: other.siblingCount,
               size: other.size,
-              variant: other.variant
+              variant: other.variant,
+              onChange:handleChangePage
             }}
             sx={{...other.sx}}        
           />

@@ -3,7 +3,7 @@ import { StyledSelect } from "./styles";
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import { useTheme } from '@mui/material/styles';
-import { SelectChangeEvent, InputLabel, FormControl } from '@mui/material';
+import { SelectChangeEvent, FormControl } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
@@ -30,11 +30,11 @@ interface FormInputProps {
     options?: Array<Option>,
     optionsType: string,
     sx?:any,
-    getSelectedValue?:any,
     itemHeight?:any,
     itemPaddingTop?:any,
     itemWidth?:any,
-    itemStyles?:React.CSSProperties
+    itemStyles?:React.CSSProperties,
+    onChange?:any
 }
 
 const Select = forwardRef((props: FormInputProps, ref) => {
@@ -46,9 +46,9 @@ const Select = forwardRef((props: FormInputProps, ref) => {
             target: { value },
         } = event;
         setSelected(
-            typeof value === 'string' ? value.split(',') : value,
+            typeof value === 'string' ? value.split(',') : value.toString().split(','),
         );
-        getSelectedValue(typeof value === 'string' ? value.split(',') : value)
+        props.onChange(event)
     }; const {
         size = "small",
         variant = "outlined",
@@ -60,11 +60,10 @@ const Select = forwardRef((props: FormInputProps, ref) => {
         multiple = false,
         optionsType = 'default',
         sx,
-        getSelectedValue,
         itemHeight=48,
         itemPaddingTop=8,
         itemWidth=250,
-        itemStyles
+        itemStyles,
     } = props;
     const MenuProps = {
         PaperProps: {
@@ -75,14 +74,14 @@ const Select = forwardRef((props: FormInputProps, ref) => {
         },
     };
     useEffect(()=>{
-        console.log(options)
-        setSelected(
-            typeof options[0].value === 'string' ? options[0].value.split(',') : options[0].value,
-        );
+        if(options.length>0){
+            setSelected(
+                typeof options[0].value === 'string' ? options[0].value.split(',') : options[0].value,
+            );
+        }
     },[])
     return (
         <FormControl sx={{minWidth:'100%'}}>
-            {/* <InputLabel id="demo-simple-select-label" sx={{ paddingBottom: '20px' }} color="primary">Name</InputLabel> */}
             <StyledSelect
                 ownerState={{size}}
                 id="demo-simple-select-standard"
@@ -92,13 +91,18 @@ const Select = forwardRef((props: FormInputProps, ref) => {
                 variant={variant}
                 value={selected}
                 onChange={handleChange}
-                renderValue={optionsType == "chips" ? (selected: any) => (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                renderValue={optionsType == "chips" && multiple ? (selected: any) => {
+                    return (
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                         {selected.map((value: any) => (
                             <Chip key={value} label={value} />
                         ))}
                     </Box>
-                ) : (selected: any) => selected.join(', ')
+                    )
+                } : ()=>{
+                    const optionLabel=options.filter((item)=>selected === item.value)
+                    return (<>{optionLabel[0] ? optionLabel[0].label : selected.join(', ') } </>)
+                }
                 }
                 sx={{
                     ':before': { borderBottom: '1px solid #ced4da' },
@@ -118,27 +122,20 @@ const Select = forwardRef((props: FormInputProps, ref) => {
                     <MenuItem
                         key={index}
                         value={option.value}
-                        sx={{
-                            minHeight:'4px',
-                            padding:1,
-                            ...itemStyles
-                        }}
+                        sx={{...itemStyles}}
                     >
-                        <Checkbox checked={selected.indexOf(option.value) > -1} />
-                        <ListItemText primary={option.value} />
+                        <Checkbox checked={selected.indexOf(option.label) > -1} />
+                        <ListItemText primary={option.label} />
                     </MenuItem>
                 ))
                     :
                     options?.map((option: any, index: any) => (
                         <MenuItem
-                        sx={{
-                            minHeight:'4px',
-                            padding:1
-                        }}
                             key={index}
                             value={option.value}
+                            sx={{...itemStyles}}
                         >
-                            {option.value}
+                            {option.label}
                         </MenuItem>
                     ))
                 }

@@ -9,7 +9,7 @@ interface TextFieldProps{
     onChange ?: (event : React.ChangeEvent<HTMLTextAreaElement>) => void,
     onFocus ?: (event : React.FocusEvent<HTMLTextAreaElement>) => void,
     onBlur ?: (event : React.FocusEvent<HTMLTextAreaElement>) => void,
-    sx?:React.CSSProperties
+    sx?:any
 }
 
 const TextArea = forwardRef((props : TextFieldProps)=>{
