@@ -6,22 +6,21 @@ import { Box, Mixins, Palette, Shadows, Theme, Transitions, ZIndex } from '@mui/
 import { Typography } from '@mui/material/styles/createTypography';
 
 export const Logo = styled('div')(({ theme }) => ({
-  padding: "0 1.5rem",
-  width: "250px",
-  height: "70px",
-  display: "flex",
-  alignItems: "center",
-  '& > div': {
-    backgroundImage: `url(${xsiLogo})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    backgroundSize: "90%",
-    width: "200px",
-    height: "45px"
-  },
-  // [theme.breakpoints.down('sm')]: {
-  //   display: "none"
-  // }
+        width: "250px",
+        height: "70px",
+        display: "flex",
+        alignItems: "center",
+        '& > .MuiPaper-root': {
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center center",
+          backgroundSize: "90%",
+          width: "200px",
+          height: "45px",
+          backgroundColor: "inherit"
+        },
+        [theme.breakpoints.down('sm')]: {
+          display: "none"
+        }
 }))
 
 export const Search = styled('div')(({ theme }) => ({
