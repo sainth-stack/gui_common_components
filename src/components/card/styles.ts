@@ -24,7 +24,7 @@ export const CardLabel = styled(Card)(({ theme, ownerState }: CardProps) => {
   return {
     flex:'1 1 auto',
     fontSize: theme.typography.pxToRem(19.5),
-    width:'max-content',
+    // width:'max-content',
     backgroundColor:'white',
     padding:'6px',
     outliineVariant,

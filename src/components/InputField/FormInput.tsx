@@ -18,7 +18,7 @@ interface FormInputProps {
     innerRef?: React.RefObject<HTMLInputElement>,
     startIcon?: React.ReactSVGElement | React.ReactNode,
     endIcon?: React.ReactSVGElement | React.ReactNode,
-    sx?:React.CSSProperties
+    sx?:any
 }
 
 const FormInput = forwardRef((props: FormInputProps, ref) => {
@@ -47,6 +47,7 @@ const FormInput = forwardRef((props: FormInputProps, ref) => {
             theme={theme}
             variant={variant}
             sx={{...sx}}
+            autoComplete='off'
             InputProps={{
                 startAdornment: <InputAdornment position="start">{startIcon}</InputAdornment>,
                 endAdornment: <InputAdornment position="end">{endIcon}</InputAdornment>
