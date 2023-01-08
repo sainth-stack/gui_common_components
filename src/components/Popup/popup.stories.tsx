@@ -4,22 +4,7 @@ export default {
     title:'CommonComponents/Popup',
     component:Popup,
     argTypes: {
-        scroll: {
-            options: ['body', 'paper'],
-            control: {type: "radio"}
-        },
-        maxWidth: {
-            options: ['xs', 'sm', 'md', 'lg', 'xl'],
-            control: {type: "radio"}
-        },
-        transition: {
-            options: ['fade', 'grow', 'slide', 'zoom'],
-            control: {type: 'radio'}
-        },
-        slideDirection: {
-            options: ['down', 'left', 'right', 'up'],
-            control: {type: "radio"}
-        }
+        
     }
 } as ComponentMeta<typeof Popup>
 
@@ -38,7 +23,6 @@ export const PopupModal = Template.bind({})
 PopupModal.args = {
     isOpen: true,
     id: "dialog",
-    heading: "Title",
     children: <div>Sample Body {[...new Array(50)]
         .map(
           () => `Cras mattis consectetur purus sit amet fermentum.
@@ -47,10 +31,16 @@ Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
 Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
         )
         .join('\n')} </div>,
-    isDraggable: true,
-    fullScreen: false,
-    fullWidth: false,
-    transition: "fade",
-    slideDirection: "down",
-    sx: {'& .MuiDialogTitle-root':{backgroundColor: "red"}}
+    sx: {position: 'fixed',
+    top: '45%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    border: "none",
+    borderRadius: "4px",
+    boxSizing: "none",
+    width: "60%",
+    maxHeight: "75%",
+    overflow: "auto"
+    }
 }
