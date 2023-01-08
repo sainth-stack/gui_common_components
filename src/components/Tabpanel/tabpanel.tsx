@@ -9,19 +9,24 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 
 export interface Tab {
-  id: number;
   name: string;
+  id:number;
+  active:boolean;
+
 }
 interface ITabpanelProps {
   children?: any;
   labelKey?: string;
   itemKey?: string;
   activeTab?: Array<any>;
-  setActiveTab?: (tab: Tab) => void;
+  setActiveTab?: (item: Tab) => void;
+  onClick?:()=>void;
+  handleTab?:(item: Tab) => void;
   sx?: any;
   textColor: "primary";
   variant: "scrollable" | "standard";
   tabs?:Array<Tab>
+
 }
 
 const TabPanel = forwardRef(
@@ -30,20 +35,24 @@ const TabPanel = forwardRef(
       textColor = "primary",
       variant = "standard",
       children,
+      setActiveTab = () => {/* */},
+      handleTab=() => {},
+      onClick=()=>{},    
       sx,
+      tabs=[],
       ...other
     }: ITabpanelProps,
     ref
   ) => {
     const theme = useTheme();
-    const [alignment, setAlignment] = React.useState("");
+    const [alignment, setAlignment] = React.useState(tabs[0].name);
+    
     const handleChange = (
       event: React.MouseEvent<HTMLElement>,
-      alignment: string
-    ) => {
+      alignment: string,
+      ) => {
       setAlignment(alignment);
     };
-console.log(children)
     return (
       <StyledTabpanel
         component="span"
@@ -53,6 +62,7 @@ console.log(children)
         }}
         theme={theme}
         {...other}
+        defaultChecked
       >
         <Box
           sx={{
@@ -63,7 +73,7 @@ console.log(children)
           }}
         >
           <Tabs orientation="vertical" variant={variant}>
-            {other.tabs?.map((item:any) => {
+            {tabs?.map((item:any,index) => {
               return (
                 <Box sx={{ pr: 4 }}>
                   {" "}
@@ -72,6 +82,7 @@ console.log(children)
                     value={alignment}
                     exclusive
                     onChange={handleChange}
+                    onClick={() =>handleTab(item)}
                     aria-label="Platform"
                   >
                     <ToggleButton value={item.name}>{item.name}</ToggleButton>{" "}
