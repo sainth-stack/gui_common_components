@@ -20,7 +20,7 @@ interface ButtonGroup {
     size?: 	'small'| 'medium'| 'large',
     sx?: any,
     variant?: 'contained'| 'outlined'| 'text',
-    tabs?: Array<Tab>,
+    tabs?: Array<any>,
     activeTabs?: Array<any>,
     setActiveTab ?: (tab : Tab) => void,
     isGroup?: boolean

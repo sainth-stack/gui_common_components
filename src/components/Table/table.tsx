@@ -8,7 +8,7 @@ import {MdKeyboardArrowDown, MdKeyboardArrowUp} from "react-icons/md"
 interface Cols{
   columnKey ?: string,
   columnLabel ?: string | React.ReactNode,
-  render ?: (row : any) => React.ReactNode
+  render ?: (row : any,index:any) => React.ReactNode
 }
 
 interface TableProps{
@@ -37,19 +37,20 @@ interface TableBodyRow{
   isExpandable ?: boolean,
   expandCols ?: Array<Cols>,
   expandLabelKey?:string,
+  index?:number,
   onExpand ?: (row : object, id : string) => void
 }
 
 const getTableHeaders = ({cols, isExpandable} : TableHeaders) => {
   return <StyledTableRow>
-      {isExpandable && <StyledTableCell sx={{width: "15px"}} />}
+      {isExpandable && <StyledTableCell />}
       {cols?.map((header, index) => <StyledTableCell id={String(index)} key={`th-${index}`}>
           <span>{header?.columnLabel}</span>
       </StyledTableCell>)}
   </StyledTableRow>
 }
 
-const  TableBodyRow = ({row = {}, cols = [], isExpandable, expandCols, expandLabelKey, onExpand = () => {/* */}} : TableBodyRow) =>  {
+const  TableBodyRow = ({row = {}, cols = [], isExpandable, expandCols, expandLabelKey,index,onExpand = () => {/* */}} : TableBodyRow) =>  {
   const [isExpand, setIsExpand] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
 
@@ -79,9 +80,11 @@ const  TableBodyRow = ({row = {}, cols = [], isExpandable, expandCols, expandLab
           </IconButton>
         </StyledTableCell>}
         {
-          cols.map((col,key) => (
-            <StyledTableCell key={key}>{col.render!(row)}</StyledTableCell>
-          ))
+          cols.map((col,key) => {
+            return(
+              <StyledTableCell key={key}>{col.render!(row,index)}</StyledTableCell>
+            )
+          })
         }
       </StyledTableRow>
       {(isExpandable && isExpand) && (loader ? 
@@ -146,7 +149,7 @@ const Table = (tableProps : TableProps) => {
                     ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     : data
                   ).map((row,index) => (
-                    <TableBodyRow key={index} {...{row, cols, isExpandable, expandCols, expandLabelKey, onExpand}} />
+                    <TableBodyRow key={index} {...{row, cols, isExpandable, expandCols, expandLabelKey, onExpand,index}} />
                   ))}
                 </> : 
                   <StyledTableRow>

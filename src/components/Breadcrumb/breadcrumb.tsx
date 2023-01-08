@@ -24,6 +24,7 @@ interface BreadcrumbProps {
   fontSize?: number;
   fontWeight?: number;
   breaddata?: any;
+  md?:any;
 }
 
 const Breadcrumb = forwardRef(
@@ -36,7 +37,7 @@ const Breadcrumb = forwardRef(
       sx,
       endIcon,
       separableicon,
-
+      md,
       ...other
     }: BreadcrumbProps,
     ref 
@@ -51,6 +52,13 @@ const Breadcrumb = forwardRef(
           role="presentation"
           separator={separableicon ? <MdOutlineKeyboardArrowRight fontSize="medium" /> : separator}
           aria-label="breadcrumb"
+          sx={{
+            "& .MuiBreadcrumbs-li": {
+              ":hover": {
+                fontWeight:600,
+              },
+            },
+          }}
           {...other}
         >
           {other.breaddata?.map((item: any,index:any) => {
