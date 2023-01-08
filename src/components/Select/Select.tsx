@@ -29,7 +29,7 @@ interface FormInputProps {
     endIcon?: React.ReactSVGElement | React.ReactNode,
     options?: Array<Option>,
     optionsType: string,
-    sx?:React.CSSProperties,
+    sx?:any,
     itemHeight?:any,
     itemPaddingTop?:any,
     itemWidth?:any,
