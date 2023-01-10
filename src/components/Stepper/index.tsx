@@ -31,7 +31,7 @@ const Stepper = ({steps = [], children, sx, icons,isIconStepper,setActiveStep = 
         const { active, completed, className } = props;
         return (
           <MuiStepIconRoot ownerState={{ active }} className={className}>
-            <div className={`StepIcon-numeric ${active ? 'StepIcon-numeric-active' : ''}`}>
+            <div className={`StepIcon-numeric ${completed || active  ? 'StepIcon-numeric-active' : ''}`}>
                 {props.icon}
             </div>
           </MuiStepIconRoot>
