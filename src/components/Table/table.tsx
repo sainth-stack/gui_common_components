@@ -43,7 +43,7 @@ interface TableBodyRow{
 
 const getTableHeaders = ({cols, isExpandable} : TableHeaders) => {
   return <StyledTableRow>
-      {isExpandable && <StyledTableCell />}
+      {isExpandable && <StyledTableCell sx={{width: "15px"}} />}
       {cols?.map((header, index) => <StyledTableCell id={String(index)} key={`th-${index}`}>
           <span>{header?.columnLabel}</span>
       </StyledTableCell>)}
